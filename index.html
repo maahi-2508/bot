@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aesthetic Chatbox</title>
+<style>
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(135deg, #1f1c2c, #928dab);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .chat-container {
+        width: 350px;
+        background: rgba(255,255,255,0.1);
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        overflow: hidden;
+        position: relative;
+    }
+
+    .ribbon {
+        position: absolute;
+        top: 15px;
+        left: -40px;
+        background: #ff4d6d;
+        color: white;
+        padding: 5px 50px;
+        transform: rotate(-45deg);
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    .chat-header {
+        padding: 20px;
+        text-align: center;
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .chat-box {
+        height: 300px;
+        overflow-y: auto;
+        padding: 15px;
+        color: white;
+    }
+
+    .message {
+        margin: 10px 0;
+        padding: 10px;
+        border-radius: 10px;
+        max-width: 80%;
+    }
+
+    .bot {
+        background: rgba(255,255,255,0.2);
+        align-self: flex-start;
+    }
+
+    .user {
+        background: rgba(0,0,0,0.3);
+        margin-left: auto;
+        text-align: right;
+    }
+
+    .input-box {
+        display: flex;
+        border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+    input {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        outline: none;
+        background: transparent;
+        color: white;
+    }
+
+    button {
+        padding: 10px;
+        border: none;
+        background: #ff4d6d;
+        color: white;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+
+<div class="chat-container">
+    <div class="ribbon">Aesthetic Chat</div>
+    <div class="chat-header">✨ My Personal Chatbot ✨</div>
+
+    <div class="chat-box" id="chatBox">
+        <div class="message bot">Hi! I know a little about you 💖 Ask me!</div>
+    </div>
+
+    <div class="input-box">
+        <input type="text" id="userInput" placeholder="Type something..." />
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<script>
+function sendMessage() {
+    let input = document.getElementById('userInput');
+    let text = input.value;
+    if (!text) return;
+
+    let chatBox = document.getElementById('chatBox');
+
+    // user message
+    let userMsg = document.createElement('div');
+    userMsg.className = 'message user';
+    userMsg.innerText = text;
+    chatBox.appendChild(userMsg);
+
+    // bot reply (simple memory style)
+    let botMsg = document.createElement('div');
+    botMsg.className = 'message bot';
+
+    let response = "I don't know you yet, but I want to learn 💫";
+
+    if (text.toLowerCase().includes('who am i')) {
+        response = "You are someone creative building your own aesthetic chatbot ✨";
+    } else if (text.toLowerCase().includes('favourite book')) {
+        response = "Maybe your favourite book is something inspiring like fiction or self-growth 📚";
+    } else if (text.toLowerCase().includes('hello')) {
+        response = "Hello cutie 👋 tell me about yourself";
+    }
+
+    botMsg.innerText = response;
+    chatBox.appendChild(botMsg);
+
+    input.value = '';
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+</script>
+
+</body>
+</html>
